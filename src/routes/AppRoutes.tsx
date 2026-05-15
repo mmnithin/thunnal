@@ -3,10 +3,11 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
-
-import Home from "../pages/home";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/login/login";
+import ProtectedRoute from "./ProtectedRoute";
+import MainLayout from "../layouts/MainLayout";
+import Home from "../pages/home/home";
 
 interface Props {
     darkMode: boolean;
@@ -26,7 +27,13 @@ function AppRouter({
 
             <Routes>
 
-                <Route path="/" element={<Home />}></Route>
+                <Route path="/" element={
+                    <ProtectedRoute>
+                        <MainLayout>
+                            <Home />
+                        </MainLayout>
+                    </ProtectedRoute>
+                }></Route>
 
                 <Route path="*" element={<NotFound />}></Route>
                 <Route
